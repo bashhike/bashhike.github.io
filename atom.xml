@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>disorder</title>
+ <link href="https://bashhike.github.io/atom.xml" rel="self"/>
+ <link href="https://bashhike.github.io/"/>
+ <updated>2021-03-11T23:57:50+05:30</updated>
+ <id>https://bashhike.github.io</id>
+ <author>
+   <name>Abhishek Pandey</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>OpenNI on ROS Indigo</title>
+   <link href="https://bashhike.github.io/2017/07/09/openni-ros-indigo.html"/>
+   <updated>2017-07-09T00:00:00+05:30</updated>
+   <id>https://bashhike.github.io/2017/07/09/openni-ros-indigo</id>
+   <content type="html">&lt;p&gt;This article lists down the steps to follow in order to setup OpenNI on ROS Indigo. After trying various versions of different libraries and settings, this is what ended up working for me. Note that this has only been tested in Ubuntu 14.04 64 bit with ROS Indigo and Microsoft Kinect 360. It is assumed that you already have &lt;a href=&quot;http://wiki.ros.org/indigo/Installation/Ubuntu&quot;&gt;ROS Indigo&lt;/a&gt; installed.&lt;/p&gt;
+
+&lt;p&gt;First we have to install some peripheral Libraries:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;git-core cmake freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev  libusb-1.0-0-dev openjdk-6-jdk doxygen graphviz mono-complete
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;openni&quot;&gt;OpenNI&lt;/h3&gt;
+&lt;p&gt;Download the OpenNI package&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/kinect
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/kinect
+git clone https://github.com/OpenNI/OpenNI.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Compile the package using the Redist-System:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;OpenNI/Platform/Linux/CreateRedist/
+&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x RedistMaker
+./RedistMaker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And install it:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Final
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xjf&lt;/span&gt; OpenNI-Bin-Dev-Linux-x64-v1.5.7.10.tar.bz2
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;OpenNI-Bin-Dev-Linux-x64-v1.5.7.10
+&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sensorkinect&quot;&gt;SensorKinect&lt;/h3&gt;
+&lt;p&gt;This part is similar to the installation of OpenNI package.&lt;/p&gt;
+
+&lt;p&gt;Download the package:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~kinect/
+git clone git://github.com/ph4m/SensorKinect.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Compile package using Redist-System:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;SensorKinect/Platform/Linux/CreateRedist/
+&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x RedistMaker
+./RedistMaker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Installation:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Final
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xjf&lt;/span&gt; Sensor-Bin-Linux-x64-v5.1.2.1.tar.bz2
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Sensor-Bin-Linux-x64-v5.1.2.1
+&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nite&quot;&gt;NITE&lt;/h3&gt;
+
+&lt;p&gt;Please note that only the Versions NITE v1.5.2.21 and NITE v1.5.2.23 will work for you. Paste the nite-folder into your kinect-folder to keep track of your data:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~kinect/nite/
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xjf&lt;/span&gt; NITE-Bin-Dev-Linux-x64-v1.5.2.23.tar.bz2
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;NITE-Bin-Dev-Linux-x64-v1.5.2.23
+&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now that everything around ROS is installed, we should reboot the system:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ros-components&quot;&gt;ROS Components&lt;/h3&gt;
+
+&lt;p&gt;After all peripheral Libraries have been installed, we can install the required ros-core-components for OpenNI-usage. But we have to delete one library before that because of some issues that will appear otherwise:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get remove libopenni-sensor-pointclouds0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next is the installation of ROS-Kinect Driver:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ros-indigo-openni-launch
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ros-indigo-openni-camera
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally we can install the openni_tracker to our usual workspace (e.g.catkin_ws):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~catkin_ws/src
+git clone https://github.com/ros-drivers/openni_tracker.git 
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..
+catkin_make
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now that the OpenNI tracker is installed, you’ll be able to track skeleton of a person and view it in Rviz. Open up a bunch of terminals and run the following commands.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Terminal 1&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roslaunch openni_launch openni.launch&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Terminal 2&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;roslaunch openni_tracker openni_tracker&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Terminal 3&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rosrun rviz rviz&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To view the skeleton frame in Rviz, set the base link from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openni_depth_frame&lt;/code&gt; and add a TF component.&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>
