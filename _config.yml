@@ -1,0 +1,59 @@
+# Dependencies
+markdown:         kramdown
+highlighter:      rouge
+
+# Setup
+title:            disorder
+tagline:          "Abhishek's blog"
+description:      'Ramblings from an engineer about random things?'
+url:              https://bashhike.github.io
+baseurl:          /
+
+author:
+  name:           'Abhishek Pandey'
+  url:            https://twitter.com/bashhike_
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+#github:
+#  repo:           https://github.com/poole/hyde
+
+plugins:
+    - jekyll-paginate
+    - jekyll-gist
+    - jekyll-katex
+    - jekyll-archives
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+jekyll-archives:
+  enabled: 
+    - year
+    - tags
+  layouts: 
+    year: archives-year
+    tag: archives-tags
+  permalinks:
+    year: '/:year/'
+    tag: '/tag/:name/'
+
+gems:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-mentions
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-archives
+
+whitelist:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-mentions
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-archives
