@@ -1,7 +1,9 @@
 ---
 title: "String similarity functions, An overview"
 layout: post
-tags: review similarity
+tags: 
+- review 
+- similarity
 date:   2021-06-12 23:43:22 +0530
 ---
 

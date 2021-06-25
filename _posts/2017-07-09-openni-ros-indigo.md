@@ -1,7 +1,10 @@
 ---
 title: OpenNI on ROS Indigo
 layout: post
-tags: openni ros ubuntu
+tags: 
+- openni 
+- ros 
+- ubuntu
 ---
 This article lists down the steps to follow in order to setup OpenNI on ROS Indigo. After trying various versions of different libraries and settings, this is what ended up working for me. Note that this has only been tested in Ubuntu 14.04 64 bit with ROS Indigo and Microsoft Kinect 360. It is assumed that you already have [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu) installed. 
 
