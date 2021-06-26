@@ -246,12 +246,13 @@ We can generate the tf-idf score using the following method:
 {% katexmm %}
 - Let $t_n$ be the number of times the term t occurs in the current doc. 
 - And $D_n$ be the number of docs the term t occurs in. 
+- N is the total number of documents in the corpus. 
 
 Then we define tf-idf score as: 
 $$
-tf-idf = t_n * \frac{1}{D_n}
+tf-idf = t_n * log(\frac{N}{D_n})
 $$
-Here, the second term $\frac{1}{D_n}$ is known as the inverse document frequency. 
+Here, the second term $log(\frac{N}{D_n})$ is known as the inverse document frequency. 
 
 {% endkatexmm %}
 
